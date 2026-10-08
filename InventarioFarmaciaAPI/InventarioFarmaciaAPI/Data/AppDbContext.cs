@@ -13,4 +13,13 @@ public class AppDbContext : DbContext
     public DbSet<Medicamento> Medicamentos { get; set; }
     public DbSet<Lote> Lotes { get; set; }
     public DbSet<MovimientoInventario> Movimientos { get; set; }
+    public DbSet<Usuario> Usuarios { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // El nombre de usuario no se puede repetir
+        modelBuilder.Entity<Usuario>()
+            .HasIndex(u => u.NombreUsuario)
+            .IsUnique();
+    }
 }
