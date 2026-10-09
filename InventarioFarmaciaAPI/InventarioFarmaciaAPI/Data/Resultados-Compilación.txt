@@ -1,0 +1,5 @@
+﻿Compilación iniciada a las 02:37 p. m....
+1>------ Operación Compilar iniciada: Proyecto: InventarioFarmaciaAPI, configuración: Debug Any CPU ------
+1>  InventarioFarmaciaAPI -> C:\Users\Usuario\OneDrive\Documentos\inventario-medicamentos-farmacia\InventarioFarmaciaAPI\InventarioFarmaciaAPI\bin\Debug\net8.0\InventarioFarmaciaAPI.dll
+========== Compilación: 1 correcto, 0 erróneo, 0 actualizado, 0 omitido ==========
+========== Compilar completado a las 02:37 p. m. y tardó 24.924 segundos ==========
