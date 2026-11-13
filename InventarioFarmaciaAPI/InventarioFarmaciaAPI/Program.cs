@@ -1,4 +1,7 @@
 using InventarioFarmaciaAPI.Data;
+using InventarioFarmacia.Infrastructure.Context;
+using InventarioFarmacia.Infrastructure.Interfaces;
+using InventarioFarmacia.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,17 +10,23 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-// NUEVO: conexión a la base de datos
+// Contexto de la Tarea 2 (se mantiene por ahora)
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// NUEVO: contexto de la capa Infrastructure (base de datos aparte)
+builder.Services.AddDbContext<FarmaciaContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("InfraConnection")));
+
+// NUEVO: repositorios
+builder.Services.AddScoped<ILaboratorioRepository, LaboratorioRepository>();
+builder.Services.AddScoped<IMedicamentoRepository, MedicamentoRepository>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
