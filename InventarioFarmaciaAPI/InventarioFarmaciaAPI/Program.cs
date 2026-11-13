@@ -1,4 +1,6 @@
 using InventarioFarmaciaAPI.Data;
+using InventarioFarmacia.Application.Contract;
+using InventarioFarmacia.Application.Service;
 using InventarioFarmacia.Infrastructure.Context;
 using InventarioFarmacia.Infrastructure.Interfaces;
 using InventarioFarmacia.Infrastructure.Repositories;
@@ -14,13 +16,17 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// NUEVO: contexto de la capa Infrastructure (base de datos aparte)
+// Contexto de la capa Infrastructure (base de datos aparte)
 builder.Services.AddDbContext<FarmaciaContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("InfraConnection")));
 
-// NUEVO: repositorios
+// Repositorios
 builder.Services.AddScoped<ILaboratorioRepository, LaboratorioRepository>();
 builder.Services.AddScoped<IMedicamentoRepository, MedicamentoRepository>();
+
+// NUEVO: servicios de la capa Application
+builder.Services.AddScoped<ILaboratorioService, LaboratorioService>();
+builder.Services.AddScoped<IMedicamentoService, MedicamentoService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

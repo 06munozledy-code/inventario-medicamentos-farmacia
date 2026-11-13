@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\InventarioFarmacia.Application\InventarioFarmacia.Application.csproj" />
     <ProjectReference Include="..\InventarioFarmacia.Infrastructure\InventarioFarmacia.Infrastructure.csproj" />
   </ItemGroup>
 
