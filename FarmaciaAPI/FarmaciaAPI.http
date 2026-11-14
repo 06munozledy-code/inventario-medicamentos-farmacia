@@ -1,0 +1,6 @@
+@FarmaciaAPI_HostAddress = https://localhost:7006Invoke-RestMethod -Method Post -Uri https://localhost:7006/api/laboratorios -ContentType "application/json" -Body '{"nombre":"Bayer","telefono":"809-555-0101"}'
+
+GET {{FarmaciaAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

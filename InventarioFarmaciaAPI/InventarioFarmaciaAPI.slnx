@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="InventarioFarmacia.Domain/InventarioFarmacia.Domain.csproj" Id="0cfe9a3e-7afd-4b27-8e4c-da8520d31626" />
+  <Project Path="InventarioFarmacia.Infrastructure/InventarioFarmacia.Infrastructure.csproj" Id="5830116a-6205-47dd-a5f7-b1c1fe534b46" />
+  <Project Path="InventarioFarmaciaAPI/InventarioFarmaciaAPI.csproj" />
+</Solution>
