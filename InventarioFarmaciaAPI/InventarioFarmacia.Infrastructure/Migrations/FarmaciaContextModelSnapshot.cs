@@ -45,6 +45,37 @@ namespace InventarioFarmacia.Infrastructure.Migrations
                     b.ToTable("Laboratorios");
                 });
 
+            modelBuilder.Entity("InventarioFarmacia.Domain.Entities.Lote", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaVencimiento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MedicamentoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NumeroLote")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicamentoId");
+
+                    b.ToTable("Lotes");
+                });
+
             modelBuilder.Entity("InventarioFarmacia.Domain.Entities.Medicamento", b =>
                 {
                     b.Property<int>("Id")
@@ -77,6 +108,51 @@ namespace InventarioFarmacia.Infrastructure.Migrations
                     b.ToTable("Medicamentos");
                 });
 
+            modelBuilder.Entity("InventarioFarmacia.Domain.Entities.MovimientoInventario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LoteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Observacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TipoMovimiento")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LoteId");
+
+                    b.ToTable("Movimientos");
+                });
+
+            modelBuilder.Entity("InventarioFarmacia.Domain.Entities.Lote", b =>
+                {
+                    b.HasOne("InventarioFarmacia.Domain.Entities.Medicamento", "Medicamento")
+                        .WithMany()
+                        .HasForeignKey("MedicamentoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Medicamento");
+                });
+
             modelBuilder.Entity("InventarioFarmacia.Domain.Entities.Medicamento", b =>
                 {
                     b.HasOne("InventarioFarmacia.Domain.Entities.Laboratorio", "Laboratorio")
@@ -88,9 +164,25 @@ namespace InventarioFarmacia.Infrastructure.Migrations
                     b.Navigation("Laboratorio");
                 });
 
+            modelBuilder.Entity("InventarioFarmacia.Domain.Entities.MovimientoInventario", b =>
+                {
+                    b.HasOne("InventarioFarmacia.Domain.Entities.Lote", "Lote")
+                        .WithMany("Movimientos")
+                        .HasForeignKey("LoteId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Lote");
+                });
+
             modelBuilder.Entity("InventarioFarmacia.Domain.Entities.Laboratorio", b =>
                 {
                     b.Navigation("Medicamentos");
+                });
+
+            modelBuilder.Entity("InventarioFarmacia.Domain.Entities.Lote", b =>
+                {
+                    b.Navigation("Movimientos");
                 });
 #pragma warning restore 612, 618
         }
