@@ -23,6 +23,8 @@ builder.Services.AddDbContext<FarmaciaContext>(options =>
 // Repositorios
 builder.Services.AddScoped<ILaboratorioRepository, LaboratorioRepository>();
 builder.Services.AddScoped<IMedicamentoRepository, MedicamentoRepository>();
+builder.Services.AddScoped<ILoteRepository, LoteRepository>();
+builder.Services.AddScoped<IMovimientoInventarioRepository, MovimientoInventarioRepository>();
 
 // NUEVO: servicios de la capa Application
 builder.Services.AddScoped<ILaboratorioService, LaboratorioService>();
